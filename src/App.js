@@ -1,33 +1,46 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Mogus from './Info.js'
-
+import React from "react";
+import ReactDOM from "react-dom";
+import Mogus from "./Info.js";
+import "./App.css";
 
 export default class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      password: 'amogos',
-      authorized: false
+      username: "alexjb22",
+      password: "amogos",
+      authorized: false,
+    };
+    this.authorize = this.authorize.bind(this);
+  }
+
+  authorize(e) {
+    console.log(e);
+    if (
+      document.getElementById("username").value === this.state.username &&
+      document.getElementById("password").value === this.state.password
+    ) {
+      this.setState({ authorized: true });
     }
-    this.authorize = this.authorize.bind(this)
   }
-
-
-  authorize() {
-    this.setState({authorized: true});
-  }
-
-
   render() {
-    const button = (<button onClick={this.authorize}>Click</button>)
+    const button = (
+      <form action="#" onSubmit={this.authorize}>
+        <input type={"text"} id={"username"} placeholder={"username"}></input>
+        <input
+          type={"password"}
+          id={"password"}
+          placeholder={"password"}
+        ></input>
+        <input type="submit"></input>
+      </form>
+    );
     return (
       <div>
-        <h1>State is: {this.state.authorized ? 'YES' : 'NO LLLLLLLLLL'}</h1>
+        <h1>State is: {this.state.authorized ? "YES" : "NO LLLLLLLLLL"}</h1>
         {this.state.authorized ? <Mogus /> : button}
       </div>
-      
-    )
+    );
   }
 }
-ReactDOM.render(<App/>, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById("root"));
